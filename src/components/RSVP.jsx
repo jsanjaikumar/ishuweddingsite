@@ -178,13 +178,19 @@
 //   );
 // }
 
-
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 import SectionWrapper from "./SectionWrapper";
 import SectionHeading from "./SectionHeading";
 
-function Field({ label, id, name, type = "text", required, value, onChange }) {
+function Field({
+  label,
+  id,
+  name,
+  type = "text",
+  required,
+  value,
+  onChange,
+}) {
   return (
     <div className="flex flex-col gap-1.5 w-full">
       <label
@@ -218,31 +224,45 @@ export default function RSVP() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const onChange = (e) =>
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  const onChange = (e) => {
+    setForm((f) => ({
+      ...f,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setError("");
+
     try {
-      await emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        {
-          name: form.name,
-          email: form.email,
-          attending: form.attending,
-          message: form.message,
-          to_email: "jsanjai2004@gmail.com",
+      const response = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        "YOUR_PUBLIC_KEY"
-      );
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Unable to send RSVP.");
+      }
 
       setSubmitted(true);
     } catch (error) {
-      console.error("RSVP email failed:", error);
-      alert("Unable to send RSVP. Please try again.");
+      console.error("RSVP submission failed:", error);
+      setError("Unable to send your RSVP. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -271,7 +291,8 @@ export default function RSVP() {
             <p className="font-sans text-sm text-[#4e4639] leading-relaxed max-w-md mx-auto">
               Your prescription of blessings has reached our hearts.
               <br className="hidden sm:block" />
-              We look forward to celebrating this unforgettable milestone with you!
+              We look forward to celebrating this unforgettable milestone with
+              you!
             </p>
           </div>
         ) : (
@@ -293,7 +314,10 @@ export default function RSVP() {
               <div className="w-10 sm:w-16 h-px bg-gradient-to-l from-transparent to-[#c5a059]" />
             </div>
 
-            <form onSubmit={onSubmit} className="flex flex-col gap-5 sm:gap-6">
+            <form
+              onSubmit={onSubmit}
+              className="flex flex-col gap-5 sm:gap-6"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <Field
                   label="Full Name"
@@ -384,12 +408,19 @@ export default function RSVP() {
                 />
               </div>
 
+              {error && (
+                <p className="text-center font-sans text-sm text-red-600">
+                  {error}
+                </p>
+              )}
+
               <div className="flex justify-center pt-2">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium bg-[#c5a059] hover:bg-[#775a19] text-white px-10 sm:px-14 min-h-[48px] flex items-center justify-center transition-all duration-300 shadow-sm cursor-pointer hover:shadow-md"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-medium bg-[#c5a059] hover:bg-[#775a19] text-white px-10 sm:px-14 min-h-[48px] flex items-center justify-center transition-all duration-300 shadow-sm cursor-pointer hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Submit RSVP
+                  {isSubmitting ? "Sending..." : "Submit RSVP"}
                 </button>
               </div>
             </form>
