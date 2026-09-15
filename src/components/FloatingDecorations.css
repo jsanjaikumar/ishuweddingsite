@@ -1,0 +1,162 @@
+/* Floating Decorations & Ambient Visuals Stylesheet */
+
+/* Petal Falling & Swaying Animation */
+@keyframes petalDrift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.95);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate3d(24px, 45px, 0) rotate(22deg) scale(1.05);
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(-18px, 95px, 0) rotate(48deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.petal-anim {
+  animation-name: petalDrift;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+/* Floating Heart Animation */
+@keyframes heartFloatSoft {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.95) rotate(-3deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(12px, -30px, 0) scale(1.08) rotate(5deg);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(-8px, -65px, 0) scale(0.92) rotate(-4deg);
+    opacity: 0;
+  }
+}
+
+.heart-anim {
+  animation-name: heartFloatSoft;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+/* Sparkle Twinkle Animation */
+@keyframes sparkleTwinkle {
+  0%, 100% {
+    transform: scale(0.6) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.2) rotate(45deg);
+    opacity: 0.9;
+  }
+}
+
+.sparkle-anim {
+  animation: sparkleTwinkle 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Cardiac Pulse Path Animation (EKG) */
+.ekg-pulse-path {
+  stroke-dasharray: 200, 300;
+  stroke-dashoffset: 500;
+  animation: ekgDraw 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes ekgDraw {
+  0% {
+    stroke-dashoffset: 500;
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  80% {
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+  100% {
+    stroke-dashoffset: -100;
+    opacity: 0.2;
+  }
+}
+
+/* Gentle Stethoscope / Anatomical Heart Floating */
+@keyframes delicateFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.animate-delicate-float {
+  animation: delicateFloat 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes delicateFloatReverse {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(-1.2deg);
+  }
+}
+
+.animate-delicate-float-reverse {
+  animation: delicateFloatReverse 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Heartbeat Pulse for medical/romantic accents */
+@keyframes heartbeatPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.15);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat-soft {
+  animation: heartbeatPulse 2.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .petal-anim,
+  .heart-anim,
+  .sparkle-anim,
+  .ekg-pulse-path,
+  .animate-delicate-float,
+  .animate-delicate-float-reverse,
+  .animate-heartbeat-soft {
+    animation: none !important;
+    transform: none !important;
+  }
+}

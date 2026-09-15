@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #fff8f3;
+  --color-ivory-dim: #e1d9cf;
+  --color-pearl: #ffffff;
+  --color-gold: #c5a059;
+  --color-gold-light: #e9c176;
+  --color-gold-dark: #775a19;
+  --color-champagne: #f7e7ce;
+  --color-rose: #f4e1e1;
+  --color-umber: #1f1b15;
+  --color-umber-soft: #4e4639;
+  --color-outline: #7f7667;
+  --color-outline-soft: #d1c5b4;
+
+  --font-serif: "EB Garamond", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #fff8f3;
+    color: #1f1b15;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 320px;
+    overflow-x: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.site-container {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+.section-shell {
+  position: relative;
+  overflow: clip;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+.section-label,
+.font-serif {
+  text-wrap: balance;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+/* Gold divider utilities */
+.divider-gold {
+  width: 100%;
+  height: 0.5px;
+  background: linear-gradient(to right, transparent, #c5a059, transparent);
+}
+
+.divider-center {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.divider-center::before,
+.divider-center::after {
+  content: "";
+  flex: 1;
+  height: 0.5px;
+  background: #c5a059;
+  opacity: 0.5;
+}
+
+/* Section label */
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #c5a059;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* Warm image filter */
+.img-warm {
+  filter: sepia(8%) saturate(90%) brightness(1.02);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.float-symbol {
+  position: absolute;
+  color: rgba(199, 160, 89, 0.26);
+  font-family: var(--font-serif);
+  pointer-events: none;
+  user-select: none;
+  animation: float-gentle var(--float-duration, 12s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  transform-origin: center;
+}
+
+.float-symbol svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes float-gentle {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0.35;
+  }
+  25% {
+    transform: translate3d(4px, -10px, 0) rotate(2deg);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(-3px, -18px, 0) rotate(-2deg);
+    opacity: 0.42;
+  }
+  75% {
+    transform: translate3d(5px, -8px, 0) rotate(1deg);
+    opacity: 0.6;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pulse-gold {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.9s ease forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #fff8f3;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5a059;
+  border-radius: 2px;
+}
+
+/* Mobile-first base resets */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}

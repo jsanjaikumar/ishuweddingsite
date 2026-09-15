@@ -1,0 +1,266 @@
+/* Cardiac Surgeons Section Styling */
+
+.cardiac-section {
+  position: relative;
+  background-color: #fff8f3;
+  padding-top: clamp(3rem, 7vw, 5.5rem);
+  padding-bottom: clamp(3rem, 7vw, 5.5rem);
+  overflow: clip;
+  width: 100%;
+}
+
+.cardiac-ambient-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cardiac-glow-center {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(18rem, 45vw, 34rem);
+  height: clamp(18rem, 45vw, 34rem);
+  border-radius: 9999px;
+  background-color: rgba(244, 225, 225, 0.22);
+  filter: blur(64px);
+}
+
+.cardiac-glow-gold {
+  position: absolute;
+  bottom: 10%;
+  right: 15%;
+  width: clamp(14rem, 30vw, 24rem);
+  height: clamp(14rem, 30vw, 24rem);
+  border-radius: 9999px;
+  background-color: rgba(197, 160, 89, 0.05);
+  filter: blur(60px);
+}
+
+.cardiac-container {
+  position: relative;
+  z-index: 10;
+  width: min(100%, 76rem);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading section */
+.cardiac-header {
+  text-align: center;
+  width: 100%;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardiac-heading {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: clamp(1.4rem, 4vw, 2.75rem);
+  font-weight: 500;
+  color: #775a19;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.cardiac-heading-break {
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .cardiac-heading-break {
+    display: inline;
+  }
+}
+
+/* Subtle decorative gold element under heading */
+.cardiac-accent-line {
+  width: clamp(34px, 4vw, 46px);
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    rgba(197, 160, 89, 0.3) 0%,
+    #c5a059 50%,
+    rgba(197, 160, 89, 0.3) 100%
+  );
+  border-radius: 9999px;
+  margin-top: clamp(0.85rem, 2vw, 1.25rem);
+}
+
+/* Profiles Layout */
+.cardiac-profiles-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Faint vertical lifeline axis on mobile */
+.cardiac-lifeline {
+  position: absolute;
+  left: 50%;
+  top: 1rem;
+  bottom: 2rem;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    rgba(197, 160, 89, 0.35) 0%,
+    rgba(197, 160, 89, 0.15) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .cardiac-lifeline {
+    display: none;
+  }
+}
+
+/* Profiles Grid */
+.cardiac-profiles-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .cardiac-profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(3rem, 6vw, 6.5rem);
+    max-width: 44rem;
+    margin-inline: auto;
+    justify-items: center;
+  }
+}
+
+/* Profile Item */
+.cardiac-profile-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.cardiac-profile-item:not(:first-child) {
+  margin-top: clamp(2.5rem, 6vw, 3.75rem);
+}
+
+@media (min-width: 768px) {
+  .cardiac-profile-item:not(:first-child) {
+    margin-top: 0;
+  }
+}
+
+/* Portrait Card Frame */
+.cardiac-card-frame {
+  position: relative;
+  padding: clamp(6px, 1.2vw, 8px);
+  background-color: #fffdfa;
+  border: 1px solid rgba(197, 160, 89, 0.7);
+  border-radius: clamp(16px, 2vw, 22px);
+  box-shadow: 0 8px 24px rgba(119, 90, 25, 0.08);
+  transition:
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+  cursor: default;
+}
+
+.cardiac-card-frame:hover {
+  border-color: #c5a059;
+  box-shadow: 0 14px 34px rgba(197, 160, 89, 0.2);
+}
+
+@media (min-width: 1024px) {
+  .cardiac-card-frame:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+/* Image Container */
+.cardiac-card-img-wrapper {
+  width: clamp(9.5rem, 36vw, 13rem);
+  height: clamp(9.5rem, 36vw, 13rem);
+  border-radius: clamp(11px, 1.5vw, 15px);
+  overflow: hidden;
+  background-color: #faf3eb;
+}
+
+.cardiac-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: sepia(8%) saturate(92%) brightness(1.02);
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cardiac-card-frame:hover .cardiac-card-img {
+  transform: scale(1.04);
+}
+
+/* Profile Info */
+.cardiac-profile-name {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+  font-weight: 500;
+  color: #775a19;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-top: clamp(0.9rem, 2vw, 1.35rem);
+  margin-bottom: clamp(0.25rem, 0.8vw, 0.45rem);
+  text-align: center;
+}
+
+.cardiac-profile-role {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(11px, 1.1vw, 13px);
+  color: #7f7667;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Bottom Closing Quote */
+.cardiac-quote-wrapper {
+  width: 100%;
+  max-width: 38rem;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
+  padding-inline: 1rem;
+}
+
+.cardiac-quote-text {
+  font-family: "EB Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #4e4639;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Accessibility / Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .cardiac-card-frame,
+  .cardiac-card-img {
+    transition: none !important;
+    transform: none !important;
+  }
+}
